@@ -1,0 +1,5 @@
+.social-networks>li {
+    display: inline;
+    padding: 0 10px;
+    font-size: 2rem;
+}

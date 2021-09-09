@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 
@@ -11,6 +11,8 @@ export class FooterComponent implements OnInit {
 
   faLinkedin = faLinkedin;
   faGithub = faGithub;
+
+  @Input() title!: string;
 
   constructor() { }
 

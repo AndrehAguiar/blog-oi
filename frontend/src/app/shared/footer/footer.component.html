@@ -1,28 +1,21 @@
-<footer class="footer mt-auto pt-3 bg-secondary text-center">
+<footer class="footer mt-auto pt-3">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12 d-flex justify-content-center">
-                <h4 class="text-light">
-                    Nossas redes sociais
-                </h4>
-            </div>
-        </div>
-        <div class="row">
-            <ul class="p-2">
+        <div class="row bg-dark py-3 d-flex flex-row justify-content-between  align-items-center">
+
+            <span class="text-light text-left w-auto">&copy; Copyright | {{ title }}</span>
+
+            <ul class="social-networks w-auto m-0">
                 <li>
-                    <a href=" " class="icoLinkedin text-light" title="Linkedin">
-                        <fa-icon [icon]="faLinkedin "></fa-icon>
+                    <a href=" " class="ico icoLinkedin text-light" title="Linkedin">
+                        <fa-icon [icon]="faLinkedin"></fa-icon>
                     </a>
                 </li>
                 <li>
-                    <a href=" " class="icoGithub  text-light" title="Github ">
+                    <a href=" " class="ico icoGithub  text-light" title="Github ">
                         <fa-icon [icon]="faGithub "></fa-icon>
                     </a>
                 </li>
             </ul>
-        </div>
-        <div class="row bg-dark py-3 ">
-            <span class="text-light ">&copy; copyright | OI!?</span>
         </div>
     </div>
 </footer>

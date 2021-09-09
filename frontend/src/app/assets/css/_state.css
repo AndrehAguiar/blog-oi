@@ -1,0 +1,4 @@
+.ico:hover {
+    color: darkgray !important;
+    transition: color 150ms;
+}

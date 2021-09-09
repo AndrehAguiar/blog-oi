@@ -32,6 +32,9 @@
                         "styles": [
                             "src/styles.css",
                             "./src/app/assets/css/_base.css",
+                            "./src/app/assets/css/_layout.css",
+                            "./src/app/assets/css/_module.css",
+                            "./src/app/assets/css/_state.css",
                             "./node_modules/bootstrap/dist/css/bootstrap.min.css"
                         ],
                         "scripts": [
