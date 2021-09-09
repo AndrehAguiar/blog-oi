@@ -1,0 +1,23 @@
+<section class="container-sm pt-5 mt-5">
+    <h1 class="text-center">Envie se feedback</h1>
+    <h5 class="text-center text-muted border-bottom pb-5">Ele é muito importante para nós!!</h5>
+    <form action="" class="mt-5 col-6 mx-auto">
+        <div class="mb-3 form-group">
+            <label for="name" class="form-label">Email address</label>
+            <input type="text" class="form-control" id="name" placeholder="Your name">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" placeholder="name@example.com">
+        </div>
+        <div class="mb-3">
+            <label for="message" class="form-label">Example textarea</label>
+            <textarea class="form-control" id="message" rows="3"></textarea>
+        </div>
+        <div class="btn-group d-grid gap-2 d-md-flex justify-content-md-end">
+
+            <button type="reset" class="btn btn-outline-danger me-md-5" [routerLink]="['/home']" routerLinkActive="router-link-active">Cancelar</button>
+            <button type="submit" class="btn btn-outline-success ms-md-5">Enviar</button>
+        </div>
+    </form>
+</section>

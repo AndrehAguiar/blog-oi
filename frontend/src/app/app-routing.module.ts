@@ -6,6 +6,7 @@ const routes: Routes = [
   { path: '', component:HomeComponent},
   { path: 'home', component:HomeComponent},
   { path: 'feed', loadChildren: () => import('./feed/feed.module').then(m => m.FeedModule) },
+  { path: 'contact', loadChildren: () => import('./contact/contact.module').then(m => m.ContactModule) },
 ];
 
 @NgModule({

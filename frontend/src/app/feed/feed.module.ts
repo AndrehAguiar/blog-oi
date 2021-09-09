@@ -1,8 +1,7 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { NgModule } from '@angular/core';
+import { FeedComponent } from './containers/feed/feed.component';
 import { FeedRoutingModule } from './feed-routing.module';
-import { FeedComponent } from './feed.component';
 
 
 @NgModule({
