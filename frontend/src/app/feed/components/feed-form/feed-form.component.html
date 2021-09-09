@@ -1,19 +1,48 @@
 <div>
-    <h3 class=" text-center mb-4 font-monospace ">Digite abaixo os seus comentários:</h3>
+    <form [formGroup]="feedForm" #form="ngForm" (ngSubmit)="onSubmit()">
+        <h3 class=" text-center mb-4 font-monospace ">Digite abaixo os seus comentários:</h3>
 
-    <div class="form-group mb-2">
-        <label for="titulo " class="font-monospace ">Título:</label>
-        <input type="text " name="titulo " id="titulo " class="form-control " placeholder="Digite o título da postagem ">
-    </div>
+        <div class="form-group mb-2">
+            <label for="titulo " class="font-monospace ">Título:</label>
+            <input type="text " name="name " id="titulo " class="form-control " placeholder="Digite o seu nome" required minlength="4" formControlName="userName">
 
-    <div class="form-group mb-2">
-        <label for="feed " class="font-monospace ">Feed: </label>
-        <textarea name="feed " id="feed " cols="30 " rows="10 " class="form-control " placeholder="Digite seu feed "></textarea>
-    </div>
+            <div *ngIf="
+            userName.touched && userName.hasError('required') || 
+            userName.touched && userName.hasError('minlength')" class="alert alert-danger">
 
-    <div class="button-group d-flex justify-content-end">
-        <button type="button" class="btn btn-outline-info w-25 mt-2">Publicar</button>
-    </div>
+                <span *ngIf="userName.errors?.required">
+                    Name is required.
+                </span>
+                <span *ngIf="userName.errors?.minlength">
+                    Name must be at least 4 characters long.
+                </span>
+
+            </div>
+        </div>
+
+        <div class="form-group mb-2">
+            <label for="feed " class="font-monospace ">Feed: </label>
+            <textarea name="message " id="feed " cols="30 " rows="10 " class="form-control " placeholder="Digite seu feed" required formControlName="feedMessage"></textarea>
+
+            <div *ngIf="
+            feedMessage.touched && feedMessage.hasError('required') || 
+            feedMessage.touched && feedMessage.hasError('minlength')" class="alert alert-danger">
+
+                <span *ngIf="feedMessage.errors?.required">
+                    Message is required.
+                </span>
+                <span *ngIf="feedMessage!.errors?.minlength">
+                    Name must be at least 10 characters long.
+                </span>
+
+            </div>
+        </div>
+
+        <div class="button-group d-flex justify-content-end">
+            <button type="submit" class="btn btn-outline-info w-25 mt-2" [disabled]="!feedForm.valid">Publicar</button>
+        </div>
+
+    </form>
 
 </div>
 <hr class="my-4">

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FeedCardComponent } from './components/feed-card/feed-card.component';
 import { FeedFormComponent } from './components/feed-form/feed-form.component';
@@ -19,6 +20,8 @@ import { FeedRoutingModule } from './feed-routing.module';
     CommonModule,
     FeedRoutingModule,
     FontAwesomeModule,
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class FeedModule { }

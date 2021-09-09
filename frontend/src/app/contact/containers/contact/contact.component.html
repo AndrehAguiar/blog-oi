@@ -2,7 +2,7 @@
     <h1 class="text-center">Envie seu feedback</h1>
     <h5 class="text-center text-muted border-bottom pb-5">Ele é muito importante para nós!!</h5>
 
-    <form action="" [formGroup]="contactForm" #form="ngForm" (ngSubmit)="onSubmit()" class="my-5 col-6 mx-auto">
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="my-5 col-6 mx-auto">
 
         <div class="mb-3 form-group">
             <label for="name" class="form-label">Name</label>
