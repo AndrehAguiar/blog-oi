@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FeedComponent } from './containers/feed/feed.component';
 import { FeedRoutingModule } from './feed-routing.module';
 
@@ -12,6 +12,7 @@ import { FeedRoutingModule } from './feed-routing.module';
   imports: [
     CommonModule,
     FeedRoutingModule,
+    FontAwesomeModule, 
   ]
 })
 export class FeedModule { }
