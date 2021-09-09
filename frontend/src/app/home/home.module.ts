@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './containers/home/home.component';
 
@@ -9,7 +10,7 @@ import { HomeComponent } from './containers/home/home.component';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
   ]
 })
 export class HomeModule { }
