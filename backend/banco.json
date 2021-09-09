@@ -1,0 +1,18 @@
+{
+    "posts": [{
+            "id": 1,
+            "name": "André",
+            "message": "Bem vindo ao novo blog!!"
+        },
+        {
+            "id": 2,
+            "name": "Augusto",
+            "message": "Qual a finalidade do blog?"
+        },
+        {
+            "id": 3,
+            "name": "Gomes",
+            "message": "Onde encontro as regras deste blog?"
+        }
+    ]
+}
