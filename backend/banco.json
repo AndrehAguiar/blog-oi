@@ -1,5 +1,5 @@
 {
-    "posts": [{
+    "feeds": [{
             "id": 1,
             "name": "André",
             "message": "Bem vindo ao novo blog!!"
