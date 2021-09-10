@@ -1,18 +1,38 @@
 {
-    "feeds": [{
-            "id": 1,
-            "name": "André",
-            "message": "Bem vindo ao novo blog!!"
-        },
-        {
-            "id": 2,
-            "name": "Augusto",
-            "message": "Qual a finalidade do blog?"
-        },
-        {
-            "id": 3,
-            "name": "Gomes",
-            "message": "Onde encontro as regras deste blog?"
-        }
-    ]
+  "feeds": [
+    {
+      "name": "Angular: TESTE",
+      "message": "Teste Update POST 1",
+      "id": 1
+    },
+    {
+      "name": "Teste POST",
+      "message": "Teste POST create effects",
+      "id": 2
+    },
+    {
+      "name": "Angular: TESTE",
+      "message": "Teste POST with store",
+      "type": "[Feed] Create New Feed",
+      "id": 3
+    },
+    {
+      "name": "Angular: TESTE",
+      "message": "Teste feed create",
+      "type": "[Feed] Create New Feed",
+      "id": 4
+    },
+    {
+      "name": "Angular: TESTE",
+      "message": "Feed POST 2",
+      "type": "[Feed] Create New Feed",
+      "id": 5
+    },
+    {
+      "name": "Angular: TESTE",
+      "message": "Teste post 3",
+      "type": "[Feed] Create New Feed",
+      "id": 6
+    }
+  ]
 }

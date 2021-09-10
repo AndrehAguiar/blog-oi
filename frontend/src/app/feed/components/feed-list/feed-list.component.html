@@ -8,6 +8,7 @@
 
         <ag-loader *ngIf="loading$ | async"></ag-loader>
         <div *ngIf="!(loading$ | async) && !(error$ | async) && !!listFeed">
+
             <div class="card mb-4" *ngFor="let feed of listFeed">
                 <div class="card-title">
                     <h5 class="badge rounded-pill bg-dark position-absolute top-0 translate-middle">{{ feed.id }}</h5>

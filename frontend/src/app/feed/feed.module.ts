@@ -11,7 +11,7 @@ import { FeedListComponent } from './components/feed-list/feed-list.component';
 import { FeedComponent } from './containers/feed/feed.component';
 import { FeedRoutingModule } from './feed-routing.module';
 import { FeedEffects } from './state/feed.effects';
-import { feedReducer } from './state/feed.reducer';
+import { reducerMap } from './state/feed.reducer';
 
 
 @NgModule({
@@ -27,7 +27,7 @@ import { feedReducer } from './state/feed.reducer';
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
-    StoreModule.forFeature('feed', feedReducer),
+    StoreModule.forFeature('feedModule', reducerMap),
     EffectsModule.forFeature([FeedEffects]),
     ComponentsModule,
   ]

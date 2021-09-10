@@ -1,7 +1,11 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { select, Store } from '@ngrx/store';
+import { Observable, Subject } from 'rxjs';
 import { Feed } from '../../models/feed.model';
-import { FeedService } from '../../services/feed.service';
+import * as fromFeedSelectors from '../../state/feed.selectors';
+import * as fromFeedActions from '../../state/feed.actions';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'fd-feed-form',
@@ -9,18 +13,22 @@ import { FeedService } from '../../services/feed.service';
   styleUrls: ['./feed-form.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FeedFormComponent implements OnInit {
+export class FeedFormComponent implements OnInit, OnDestroy {
 
+  feed$!: Observable<Feed>;
   feed!: Feed;
-  feedForm: FormGroup;
-  @Output() createdFeed: EventEmitter<Feed> = new EventEmitter();
+  saving$!: Observable<boolean>;
+  error$!: Observable<boolean>;
 
-  constructor(private service: FeedService,
-              private formBuilder: FormBuilder) {
-    
-    this.service = service;
+  feedForm: FormGroup;
+  @Output() eventToggle: EventEmitter<boolean> = new EventEmitter();
+
+  private componentDestroyed$ = new Subject();
+
+  constructor(private store: Store,
+    private formBuilder: FormBuilder) {
     this.feed = new Feed();
-    
+
     this.feedForm = this.formBuilder.group({
       name: new FormControl('', [
         Validators.required,
@@ -36,15 +44,35 @@ export class FeedFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  @Input() createFeed(feed: Feed): void {
-      this.createdFeed.emit(this.feed);
+  onSubmit() {
+
+    const entity = this.feedForm.value
+    
+    this.store.dispatch(fromFeedActions.createNewFeed(entity));
+
+    this.feed$ = this.store.pipe(select(fromFeedSelectors.selectFeedEntity));
+
+    //this.feed$.pipe(takeUntil(this.componentDestroyed$))
+    //.subscribe(value => this.feed = value);
+
+    this.saving$ = this.store.pipe(select(fromFeedSelectors.selectFeedSaving));
+
+    this.error$ = this.store.pipe(select(fromFeedSelectors.selectFeedError));
+
+    this.onToggleForm();
+  }  
+
+  @Input() onToggleForm(): void {
+    this.eventToggle.emit();
   }
 
-  onSubmit() {  
-    this.createFeed(this.feedForm.value);
-  }
+  get name() { return this.feedForm.controls.name }
+  get message() { return this.feedForm.controls.message }
+  
 
-  get name() {return this.feedForm.controls.name }
-  get message() {return this.feedForm.controls.message }
+  ngOnDestroy(): void {
+    this.componentDestroyed$.next();
+    this.componentDestroyed$.unsubscribe();
+  }
 
 }

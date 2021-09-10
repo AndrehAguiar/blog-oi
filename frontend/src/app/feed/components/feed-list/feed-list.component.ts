@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Feed } from '../../models/feed.model';
 import { FeedService } from '../../services/feed.service';
 import * as fromFeedActions from '../../state/feed.actions';
-import { IFeedState } from '../../state/feed.reducer';
+import { IFeedsState } from '../../state/feed.reducer';
 import * as fromFeedSelectors from '../../state/feed.selectors';
 
 @Component({
@@ -14,9 +14,8 @@ import * as fromFeedSelectors from '../../state/feed.selectors';
   styleUrls: ['./feed-list.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FeedListComponent implements OnInit {
+export class FeedListComponent implements OnInit, OnDestroy {
 
-  @Output() loadedFeeds: EventEmitter<Feed[]> = new EventEmitter();
   @Output() eventToggle: EventEmitter<boolean> = new EventEmitter();
 
   listFeed$!: Observable<Feed[]>;
@@ -26,33 +25,29 @@ export class FeedListComponent implements OnInit {
 
   private componentDestroyed$ = new Subject();
 
-  constructor(private store: Store<IFeedState>) {
+  constructor(private store: Store<IFeedsState>) {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(fromFeedActions.loadFeedList());
+    this.store.dispatch(fromFeedActions.loadFeedsList());
 
-    this.listFeed$ = this.store.pipe(select(fromFeedSelectors.selectFeedEntity));
+    this.listFeed$ = this.store.pipe(select(fromFeedSelectors.selectFeedsEntity));
 
     this.listFeed$
       .pipe(takeUntil(this.componentDestroyed$))
-      .subscribe(value => this.listFeed = value)
+      .subscribe(value => this.listFeed = value);      
 
-    this.loading$ = this.store.pipe(select(fromFeedSelectors.selectFeedError));
+    this.loading$ = this.store.pipe(select(fromFeedSelectors.selectFeedsLoading));
 
-    this.error$ = this.store.pipe(select(fromFeedSelectors.selectFeedError))
+    this.error$ = this.store.pipe(select(fromFeedSelectors.selectFeedsError));
+  }
+
+  @Input() onToggleForm(): void {
+    this.eventToggle.emit()
   }
 
   ngOnDestroy(): void {
     this.componentDestroyed$.next();
     this.componentDestroyed$.unsubscribe();
-  }
-
-  @Input() getAllFeeds(): void {
-    this.loadedFeeds.emit();
-  }
-
-  @Input() onToggleForm(): void {
-    this.eventToggle.emit(true)
   }
 }

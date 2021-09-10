@@ -1,12 +1,35 @@
 import { createAction, props } from "@ngrx/store";
+import { Feed } from "../models/feed.model";
 
-export const loadFeedList = createAction('[Feed] Load Feed List');
+export const loadFeedsList = createAction('[Feeds] Load Feed List');
 
-export const loadFeedListSuccess = createAction(
+export const loadFeedsListSuccess = createAction(
     '[Feed] Load Feed List Success',
-    props<{ entity: any }>(),
+    props<{ entity: Feed[] }>(),
 );
 
-export const loadFeedListFailed = createAction('[Feed] Load Feed List Failed');
+export const loadFeedsListFailed = createAction(
+    '[Feeds] Load Feed List Failed'
+);
 
-export const clearFeedState = createAction('[Feed] Clear Feed State');
+export const clearFeedsState = createAction(
+    '[Feeds] Clear Feed State'
+);
+
+export const createNewFeed = createAction(
+    '[Feed] Create New Feed',
+    props<{ entity: Feed }>(),
+);
+
+export const createNewFeedSuccess = createAction(
+    '[Feed] Create New Feed Success',
+    props<{ entity: Feed }>(),
+);
+
+export const createNewFeedFailed = createAction(
+    '[Feed] Create New Feed Failed'
+);
+
+export const clearFeedState = createAction(
+    '[Feed] Clear Feed State'
+);
