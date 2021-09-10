@@ -2,37 +2,9 @@
   "feeds": [
     {
       "name": "Angular: TESTE",
-      "message": "Teste Update POST 1",
+      "message": "POST FEED 1",
+      "type": "[Feed] Create New Feed",
       "id": 1
-    },
-    {
-      "name": "Teste POST",
-      "message": "Teste POST create effects",
-      "id": 2
-    },
-    {
-      "name": "Angular: TESTE",
-      "message": "Teste POST with store",
-      "type": "[Feed] Create New Feed",
-      "id": 3
-    },
-    {
-      "name": "Angular: TESTE",
-      "message": "Teste feed create",
-      "type": "[Feed] Create New Feed",
-      "id": 4
-    },
-    {
-      "name": "Angular: TESTE",
-      "message": "Feed POST 2",
-      "type": "[Feed] Create New Feed",
-      "id": 5
-    },
-    {
-      "name": "Angular: TESTE",
-      "message": "Teste post 3",
-      "type": "[Feed] Create New Feed",
-      "id": 6
     }
   ]
 }

@@ -6,8 +6,8 @@
         </div>
 
         <div class="col-md-8 ps-5">
-            <fd-feed-form [onToggleForm]="onToggleForm" *ngIf="!toggleForm"></fd-feed-form>
-            <fd-feed-list [onToggleForm]="onToggleForm" *ngIf="toggleForm"></fd-feed-list>
+            <fd-feed-form [onToggleForm]="onToggleForm" *ngIf="showForm"></fd-feed-form>
+            <fd-feed-list [onToggleForm]="onToggleForm" *ngIf="!showForm"></fd-feed-list>
         </div>
 
     </div>

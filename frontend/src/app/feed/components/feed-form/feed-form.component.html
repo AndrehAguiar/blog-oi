@@ -37,8 +37,12 @@
             </div>
         </div>
 
-        <div class="btn-group d-flex justify-content-end w-25">
+        <div class="d-flex justify-content-between">
+
+            <button type="button" class="btn btn-outline-danger mt-2" (click)="onToggleForm()">Cancelar</button>
+
             <button type="submit" class="btn btn-outline-info mt-2" [disabled]="!feedForm.valid">Publicar</button>
+
         </div>
 
     </form>

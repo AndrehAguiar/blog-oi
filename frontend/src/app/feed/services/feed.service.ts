@@ -15,7 +15,7 @@ export class FeedService {
   }
 
   getFeeds(): Observable<Feed[]>{
-    return this.doGet<any>()
+    return this.doGet<Feed[]>()
   }
   
   createFeed(feed: Feed){

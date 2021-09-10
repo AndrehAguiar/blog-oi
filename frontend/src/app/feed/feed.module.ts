@@ -10,8 +10,9 @@ import { FeedFormComponent } from './components/feed-form/feed-form.component';
 import { FeedListComponent } from './components/feed-list/feed-list.component';
 import { FeedComponent } from './containers/feed/feed.component';
 import { FeedRoutingModule } from './feed-routing.module';
-import { FeedEffects } from './state/feed.effects';
-import { reducerMap } from './state/feed.reducer';
+import { FeedEffects } from './state/feed/feed.effects';
+import { reducerMap } from './state/feedmap.reducer';
+import { FeedsEffects } from './state/feeds/feeds.effects';
 
 
 @NgModule({
@@ -28,7 +29,7 @@ import { reducerMap } from './state/feed.reducer';
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forFeature('feedModule', reducerMap),
-    EffectsModule.forFeature([FeedEffects]),
+    EffectsModule.forFeature([FeedEffects, FeedsEffects]),
     ComponentsModule,
   ]
 })

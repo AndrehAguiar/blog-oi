@@ -3,15 +3,14 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { select, Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { Feed } from '../../models/feed.model';
-import * as fromFeedSelectors from '../../state/feed.selectors';
-import * as fromFeedActions from '../../state/feed.actions';
-import { takeUntil } from 'rxjs/operators';
+import * as fromFeedActions from '../../state/feed/feed.actions';
+import * as fromFeedSelectors from '../../state/feed/feed.selectors';
 
 @Component({
   selector: 'fd-feed-form',
   templateUrl: './feed-form.component.html',
   styleUrls: ['./feed-form.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class FeedFormComponent implements OnInit, OnDestroy {
 
@@ -51,9 +50,6 @@ export class FeedFormComponent implements OnInit, OnDestroy {
     this.store.dispatch(fromFeedActions.createNewFeed(entity));
 
     this.feed$ = this.store.pipe(select(fromFeedSelectors.selectFeedEntity));
-
-    //this.feed$.pipe(takeUntil(this.componentDestroyed$))
-    //.subscribe(value => this.feed = value);
 
     this.saving$ = this.store.pipe(select(fromFeedSelectors.selectFeedSaving));
 
