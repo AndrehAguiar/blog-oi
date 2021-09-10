@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Feed } from '../../models/feed.model';
 import { FeedService } from '../../services/feed.service';
@@ -6,24 +6,27 @@ import { FeedService } from '../../services/feed.service';
 @Component({
   selector: 'fd-feed-form',
   templateUrl: './feed-form.component.html',
-  styleUrls: ['./feed-form.component.css']
+  styleUrls: ['./feed-form.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FeedFormComponent implements OnInit {
 
   feed!: Feed;
   feedForm: FormGroup;
+  @Output() createdFeed: EventEmitter<Feed> = new EventEmitter();
 
   constructor(private service: FeedService,
               private formBuilder: FormBuilder) {
     
     this.service = service;
+    this.feed = new Feed();
     
     this.feedForm = this.formBuilder.group({
-      userName: new FormControl('', [
+      name: new FormControl('', [
         Validators.required,
         Validators.minLength(4)
       ]),
-      feedMessage: new FormControl('', [
+      message: new FormControl('', [
         Validators.required,
         Validators.minLength(10)
       ]),
@@ -33,19 +36,15 @@ export class FeedFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  createFeed() {
-    this.service.createFeed(this.feed)
-      .subscribe((data: any) => {
-        this.feed = data
-      })
+  @Input() createFeed(feed: Feed): void {
+      this.createdFeed.emit(this.feed);
   }
 
-  onSubmit() {
-    // TODO: Use EventEmitter with form value
-    console.warn(this.feedForm.value);
+  onSubmit() {  
+    this.createFeed(this.feedForm.value);
   }
 
-  get userName() {return this.feedForm.controls.userName }
-  get feedMessage() {return this.feedForm.controls.feedMessage }
+  get name() {return this.feedForm.controls.name }
+  get message() {return this.feedForm.controls.message }
 
 }

@@ -6,10 +6,8 @@
         </div>
 
         <div class="col-md-8 ps-5">
-            <fd-feed-form></fd-feed-form>
-            <div class="mt-5 mb-5">
-                <fd-feed-list></fd-feed-list>
-            </div>
+            <fd-feed-form [createFeed]="createFeed" *ngIf="toggleForm"></fd-feed-form>
+            <fd-feed-list></fd-feed-list>
         </div>
 
     </div>

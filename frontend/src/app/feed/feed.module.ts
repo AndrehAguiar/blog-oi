@@ -2,11 +2,16 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { ComponentsModule } from '../shared/components/components.module';
 import { FeedCardComponent } from './components/feed-card/feed-card.component';
 import { FeedFormComponent } from './components/feed-form/feed-form.component';
 import { FeedListComponent } from './components/feed-list/feed-list.component';
 import { FeedComponent } from './containers/feed/feed.component';
 import { FeedRoutingModule } from './feed-routing.module';
+import { FeedEffects } from './state/feed.effects';
+import { feedReducer } from './state/feed.reducer';
 
 
 @NgModule({
@@ -22,6 +27,9 @@ import { FeedRoutingModule } from './feed-routing.module';
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
+    StoreModule.forFeature('feed', feedReducer),
+    EffectsModule.forFeature([FeedEffects]),
+    ComponentsModule,
   ]
 })
 export class FeedModule { }
