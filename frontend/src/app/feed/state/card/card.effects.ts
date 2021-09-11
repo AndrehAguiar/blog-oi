@@ -12,7 +12,7 @@ export class CardEffects {
         .pipe(ofType(fromCardActions.loadFeedsByName),
             mergeMap(({ name }: { name: string }) => this.feedService.getFeedsByName(name)),
             catchError((err, caught$) => {
-                this.store.dispatch(fromCardActions.loadFeedsByNameFailed());
+                this.store.dispatch(fromCardActions.loadFeedsByNameFailed(err));
                 return caught$;
             }),
             map((entity: Feed[]) => fromCardActions.loadFeedsByNameSuccess({ entity })),

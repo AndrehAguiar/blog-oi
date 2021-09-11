@@ -16,10 +16,10 @@ import * as fromFeedSelectors from '../../state/feed/feed.selectors';
 export class FeedFormComponent implements OnInit, OnDestroy {
 
   feed$!: Observable<Feed>;
-  feed!: Feed;
   saving$!: Observable<boolean>;
   error$!: Observable<boolean>;
-
+  
+  feed!: Feed;
   feedForm: FormGroup;
   @Output() eventToggle: EventEmitter<boolean> = new EventEmitter();
 
@@ -46,30 +46,28 @@ export class FeedFormComponent implements OnInit, OnDestroy {
 
   onSubmit() {
 
-    const entity = this.feedForm.value
-    
+    const entity = this.feedForm.value;    
     this.store.dispatch(fromFeedActions.createNewFeed(entity));
-
     this.feed$ = this.store.pipe(select(fromFeedSelectors.selectFeedEntity));
-
     this.saving$ = this.store.pipe(select(fromFeedSelectors.selectFeedSaving));
-
     this.error$ = this.store.pipe(select(fromFeedSelectors.selectFeedError));
-
     this.onToggleForm();
+
   }  
+
+  get name() { return this.feedForm.controls.name }
+  get message() { return this.feedForm.controls.message }
 
   @Input() onToggleForm(): void {
     this.eventToggle.emit();
   }
 
-  get name() { return this.feedForm.controls.name }
-  get message() { return this.feedForm.controls.message }
   
 
   ngOnDestroy(): void {
     this.componentDestroyed$.next();
     this.componentDestroyed$.unsubscribe();
+    this.store.dispatch(fromFeedActions.clearFeedState());
   }
 
 }

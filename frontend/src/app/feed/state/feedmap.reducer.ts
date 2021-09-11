@@ -11,9 +11,11 @@ export interface IFeatureState {
     config: IConfigState,
 }
 
+/*
 export interface State{
     feedModule: IFeatureState;
 }
+*/
 
 export const reducerMap = {
     feeds:feedsReducer,

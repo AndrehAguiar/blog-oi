@@ -49,5 +49,6 @@ export class FeedListComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.componentDestroyed$.next();
     this.componentDestroyed$.unsubscribe();
+    this.store.dispatch(fromFeedsActions.clearFeedsState());
   }
 }

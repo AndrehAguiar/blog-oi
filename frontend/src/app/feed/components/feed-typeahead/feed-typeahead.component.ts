@@ -10,7 +10,7 @@ import { Feed } from '../../models/feed.model';
   selector: 'fd-feed-typeahead',
   templateUrl: './feed-typeahead.component.html',
   styleUrls: ['./feed-typeahead.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class FeedTypeaheadComponent implements OnInit, AfterContentChecked, ControlValueAccessor {
 
@@ -79,7 +79,7 @@ export class FeedTypeaheadComponent implements OnInit, AfterContentChecked, Cont
     this.disabled = isDisabled;
   }
 
-  writeValue(feed: Feed): void {
+  writeValue(feed: IFeedTypeahead): void {
     this.feed = feed;
   }
 

@@ -4,21 +4,20 @@ import { IFeedsState } from "../feeds/feeds.reducer";
 import * as fromCardActions from "./card.actions";
 
 export interface ICardState {
-    entity: Array<Feed>;
+    entity: any;
     loading: boolean;
     error: boolean;
 }
 
 export const cardInitialState: ICardState = {
-    entity: new Array<Feed>(),
+    entity: undefined,
     loading: false,
     error: false,
 }
 
 export const cardReducer = createReducer(
     cardInitialState,
-    on(fromCardActions.clearCardState, () =>
-        cardInitialState),
+    on(fromCardActions.clearCardState, () => cardInitialState),
     on(fromCardActions.loadFeedsByName, state => ({
         ...state,
         loading: true,
@@ -36,7 +35,7 @@ export const cardReducer = createReducer(
     }))
 );
 
-export function fnCardReducer(state: ICardState | undefined, action: Action): IFeedsState {
+export function fnCardReducer(state: ICardState, action: Action): IFeedsState {
     return cardReducer(state, action);
 
 }
