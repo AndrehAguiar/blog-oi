@@ -4,6 +4,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { Feed } from '../../models/feed.model';
 import * as fromFeedActions from '../../state/feed/feed.actions';
+import { IFeedState } from '../../state/feed/feed.reducer';
 import * as fromFeedSelectors from '../../state/feed/feed.selectors';
 
 @Component({
@@ -24,7 +25,7 @@ export class FeedFormComponent implements OnInit, OnDestroy {
 
   private componentDestroyed$ = new Subject();
 
-  constructor(private store: Store,
+  constructor(private store: Store<IFeedState>,
     private formBuilder: FormBuilder) {
     this.feed = new Feed();
 

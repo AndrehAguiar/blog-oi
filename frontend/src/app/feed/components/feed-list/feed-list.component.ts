@@ -3,22 +3,23 @@ import { select, Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Feed } from '../../models/feed.model';
-import { IFeedsState } from '../../state/feeds/feeds.reducer';
 import * as fromFeedsActions from '../../state/feeds/feeds.actions';
+import { IFeedsState } from '../../state/feeds/feeds.reducer';
 import * as fromFeedsSelectors from '../../state/feeds/feeds.selectors';
 
 @Component({
   selector: 'fd-feed-list',
   templateUrl: './feed-list.component.html',
   styleUrls: ['./feed-list.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class FeedListComponent implements OnInit, OnDestroy {
 
-  @Output() eventToggle: EventEmitter<boolean> = new EventEmitter();
+  @Output() eventToggle: EventEmitter<void> = new EventEmitter();
+  @Output() eventList: EventEmitter<any> = new EventEmitter();
 
-  listFeed$!: Observable<Feed[]>;
-  listFeed!: Feed[];
+  listFeed$!: Observable<Array<Feed>>;
+  listFeed!: Array<Feed>;
   loading$!: Observable<boolean>;
   error$!: Observable<boolean>;
 
@@ -28,7 +29,7 @@ export class FeedListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    
+
     this.store.dispatch(fromFeedsActions.loadFeedsList());
 
     this.listFeed$ = this.store.pipe(select(fromFeedsSelectors.selectFeedsEntity));
@@ -38,6 +39,7 @@ export class FeedListComponent implements OnInit, OnDestroy {
     this.loading$ = this.store.pipe(select(fromFeedsSelectors.selectFeedsLoading));
 
     this.error$ = this.store.pipe(select(fromFeedsSelectors.selectFeedsError));
+
   }
 
   @Input() onToggleForm(): void {

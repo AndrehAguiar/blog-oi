@@ -14,6 +14,7 @@ import { HomeModule } from './home/home.module';
 import { ComponentsModule } from './shared/components/components.module';
 import { reducers } from './shared/state/app.reducer';
 import { CustomRouterSerializer } from './shared/state/router/router.reducer';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { CustomRouterSerializer } from './shared/state/router/router.reducer';
     StoreRouterConnectingModule.forRoot({
       serializer: CustomRouterSerializer
     }),
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

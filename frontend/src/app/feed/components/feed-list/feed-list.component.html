@@ -1,10 +1,9 @@
 <div class="mt-5 mb-5">
     <div class="container">
-        <h3 class="text-center mb-5 font-monospace">Feeds adicionados</h3>
-        <div class="d-flex justify-content-end w-20">
+        <div class="d-flex justify-content-end mb-3">
+            <h3 class="text-center mb-2 pb-2 font-monospace border-bottom">Feeds adicionados</h3>
             <button class="btn btn-outline-success mb-3 ms-auto w-30" (click)="onToggleForm()">Add Feed</button>
         </div>
-
 
         <ag-loader *ngIf="loading$ | async"></ag-loader>
         <div *ngIf="!(loading$ | async) && !(error$ | async) && !!listFeed">
