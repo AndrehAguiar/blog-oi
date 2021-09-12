@@ -41,7 +41,6 @@ export class FeedComponent implements OnInit, AfterContentInit, AfterContentChec
   }
 
   ngAfterContentChecked(): void {
-    //this.isListByName$ = this.store.pipe(select(fromConfigSelectos.selectListByName));
   }
 
   onToggleForm(): void {

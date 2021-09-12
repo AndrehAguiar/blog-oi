@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import emailjs, { EmailJSResponseStatus } from 'emailjs-com';
 
@@ -7,12 +8,13 @@ import emailjs, { EmailJSResponseStatus } from 'emailjs-com';
 export class ContactService {
 
   sendEmail(e: Event) {
-    emailjs.sendForm('', '', e.target as HTMLFormElement, '')
+    console.log(e);
+    
+    emailjs.sendForm('service_id', 'template_id', e.target as HTMLFormElement, 'user_id')
       .then((result: EmailJSResponseStatus) => {
-        console.log(result.text);
-        console.log(result.status);
+        return result.text;
       }, (error) => {
-        console.log(error.text);
+        throw new HttpErrorResponse({error: error.text, status: error.status});
 
       })
   }

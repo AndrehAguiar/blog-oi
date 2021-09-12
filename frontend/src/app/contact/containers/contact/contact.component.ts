@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ContactService } from '../../services/contact.service';
 
 @Component({
   selector: 'app-contact',
@@ -8,9 +9,11 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class ContactComponent implements OnInit {
 
+  @Output() eventEmail: EventEmitter<Event> = new EventEmitter();
+
   contactForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private serviceEmail: ContactService) {
     this.contactForm = this.formBuilder.group({
       contactName: new FormControl('', [
         Validators.required,
@@ -35,9 +38,8 @@ export class ContactComponent implements OnInit {
   get contactEmail() { return this.contactForm.controls.contactEmail }
   get contactMessage() { return this.contactForm.controls.contactMessage }
 
-  onSubmit() {
-    // TODO: Use EventEmitter with form value
-    console.warn(this.contactForm.value);
+  onSubmit(e:Event) {
+    this.serviceEmail.sendEmail(e);
   }
 
 }

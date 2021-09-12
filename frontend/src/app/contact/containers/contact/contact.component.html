@@ -2,11 +2,12 @@
     <h1 class="text-center">Envie seu feedback</h1>
     <h5 class="text-center text-muted border-bottom pb-5">Ele é muito importante para nós!!</h5>
 
-    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="my-5 col-6 mx-auto">
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit($event)" class="my-5 col-6 mx-auto">
 
         <div class="mb-3 form-group">
             <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Your name" value="" formControlName="contactName" required minlength="4">
+            <input type="text" class="form-control" name="to_name" id="to_name" placeholder="Your name" value="" formControlName="contactName" required minlength="4">
+            <input type="hidden" class="form-control" name="from_name" id="from_name" placeholder="Your name" value="Blog - Oi!?" required>
 
             <div *ngIf="
             contactName.touched && contactName.hasError('required') || 
@@ -24,7 +25,7 @@
 
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" placeholder="name@example.com" name="email" formControlName="contactEmail" required>
+            <input type="email" class="form-control" placeholder="name@example.com" name="reply_to" id="reply_to" formControlName="contactEmail" required>
 
             <div *ngIf="
             contactEmail.touched && contactEmail.hasError('required') ||
@@ -42,7 +43,7 @@
 
         <div class="mb-3">
             <label for="message" class="form-label">Message</label>
-            <textarea class="form-control" id="message" rows="3" name="contactMessage" formControlName="contactMessage" required minlength="50" maxlength="251"></textarea>
+            <textarea class="form-control" rows="3" name="message" id="message" formControlName="contactMessage" required minlength="50" maxlength="251"></textarea>
 
             <div *ngIf="
             contactMessage.touched && contactMessage.hasError('required') || 
@@ -65,8 +66,14 @@
         <div class="btn-group d-grid gap-2 d-md-flex justify-content-md-end">
 
             <button type="reset" class="btn btn-outline-danger me-md-5" [routerLink]="['/home']" routerLinkActive="router-link-active">Cancelar</button>
-            <button type="submit" class="btn btn-outline-success ms-md-5" [disabled]="!contactForm.valid">Enviar</button>
+            <input type="submit" class="btn btn-outline-success ms-md-5" [disabled]="!contactForm.valid" value="Enviar">
 
         </div>
     </form>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+    <script type="text/javascript">
+        emailjs.init('user_eIQ0Q2LHOV0mytY2OoQsh')
+    </script>
 </section>
