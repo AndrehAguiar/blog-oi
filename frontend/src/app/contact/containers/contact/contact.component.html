@@ -2,78 +2,89 @@
     <h1 class="text-center">Envie seu feedback</h1>
     <h5 class="text-center text-muted border-bottom pb-5">Ele é muito importante para nós!!</h5>
 
-    <form [formGroup]="contactForm" (ngSubmit)="onSubmit($event)" class="my-5 col-6 mx-auto">
 
-        <div class="mb-3 form-group">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" name="to_name" id="to_name" placeholder="Your name" value="" formControlName="contactName" required minlength="4">
-            <input type="hidden" class="form-control" name="from_name" id="from_name" placeholder="Your name" value="Blog - Oi!?" required>
+    <ag-loader *ngIf="sending$ | async"></ag-loader>
 
-            <div *ngIf="
+    <div *ngIf="!(sending$ | async) && !(error$ | async) && result === undefined">
+
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit($event)" class="my-5 col-6 mx-auto">
+
+            <div class="mb-3 form-group">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" name="to_name" id="to_name" placeholder="Your name" value="" formControlName="contactName" required minlength="4">
+                <input type="hidden" class="form-control" name="from_name" id="from_name" placeholder="Your name" value="Blog - Oi!?" required>
+
+                <div *ngIf="
             contactName.touched && contactName.hasError('required') || 
             contactName.touched && contactName.hasError('minlength')" class="alert alert-danger">
 
-                <span *ngIf="contactName.errors?.required">
+                    <span *ngIf="contactName.errors?.required">
                     Name is required.
                 </span>
-                <span *ngIf="contactName.errors?.minlength">
+                    <span *ngIf="contactName.errors?.minlength">
                     Name must be at least 4 characters long.
                 </span>
 
+                </div>
             </div>
-        </div>
 
-        <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" placeholder="name@example.com" name="reply_to" id="reply_to" formControlName="contactEmail" required>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" placeholder="name@example.com" name="reply_to" id="reply_to" formControlName="contactEmail" required>
 
-            <div *ngIf="
+                <div *ngIf="
             contactEmail.touched && contactEmail.hasError('required') ||
             contactEmail.touched && contactEmail.hasError('email')" class="alert alert-danger">
 
-                <span *ngIf="contactEmail.errors?.required">
+                    <span *ngIf="contactEmail.errors?.required">
                     E-mail is required.
                 </span>
-                <div *ngIf="contactEmail.errors?.email">
-                    E-mail is invalid.
+                    <div *ngIf="contactEmail.errors?.email">
+                        E-mail is invalid.
+                    </div>
+
                 </div>
-
             </div>
-        </div>
 
-        <div class="mb-3">
-            <label for="message" class="form-label">Message</label>
-            <textarea class="form-control" rows="3" name="message" id="message" formControlName="contactMessage" required minlength="50" maxlength="251"></textarea>
+            <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" rows="3" name="message" id="message" formControlName="contactMessage" required minlength="50" maxlength="251"></textarea>
 
-            <div *ngIf="
+                <div *ngIf="
             contactMessage.touched && contactMessage.hasError('required') || 
             contactMessage.touched && contactMessage.hasError('minlength') || 
             contactMessage.touched && contactMessage.hasError('maxlength')" class="alert alert-danger">
 
-                <span *ngIf="contactMessage.errors?.required">
+                    <span *ngIf="contactMessage.errors?.required">
                     Message is required.
                 </span>
-                <span *ngIf="contactMessage!.errors?.minlength">
+                    <span *ngIf="contactMessage!.errors?.minlength">
                     Name must be at least 50 characters long.
                 </span>
-                <span *ngIf="contactMessage!.errors?.maxlength">
+                    <span *ngIf="contactMessage!.errors?.maxlength">
                     Name must be at most 250 characters long.
                 </span>
 
+                </div>
             </div>
-        </div>
 
-        <div class="btn-group d-grid gap-2 d-md-flex justify-content-md-end">
+            <div class="btn-group d-grid gap-2 d-md-flex justify-content-md-end">
 
-            <button type="reset" class="btn btn-outline-danger me-md-5" [routerLink]="['/home']" routerLinkActive="router-link-active">Cancelar</button>
-            <input type="submit" class="btn btn-outline-success ms-md-5" [disabled]="!contactForm.valid" value="Enviar">
+                <button type="reset" class="btn btn-outline-danger me-md-5" [routerLink]="['/home']" routerLinkActive="router-link-active">Cancelar</button>
+                <input type="submit" class="btn btn-outline-success ms-md-5" [disabled]="!contactForm.valid" value="Enviar">
 
-        </div>
-    </form>
+            </div>
+        </form>
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
-    <script type="text/javascript">
-        emailjs.init('user_eIQ0Q2LHOV0mytY2OoQsh')
-    </script>
+        <script type="text/javascript">
+            emailjs.init('user_eIQ0Q2LHOV0mytY2OoQsh')
+        </script>
+    </div>
+
+
+    <div *ngIf="!(sending$ | async) && !(error$ | async) && result !== undefined">
+        <h1 class="text-center alert alert-success">Mensagem enviada com sucesso!!!</h1>
+    </div>
 </section>

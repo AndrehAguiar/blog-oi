@@ -1,21 +1,28 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import emailjs, { EmailJSResponseStatus } from 'emailjs-com';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactService {
 
-  sendEmail(e: Event) {
+  result!: any;
+  error!: any;
+  
+  async sendContactEmail(e: Event):Promise<any>{
+    this.sendEmail(e);
+    return this.result;
+  }
+
+  private sendEmail(e: Event) {
     console.log(e);
-    
+
     emailjs.sendForm('service_id', 'template_id', e.target as HTMLFormElement, 'user_id')
       .then((result: EmailJSResponseStatus) => {
-        return result.text;
+        this.result = result.status;
       }, (error) => {
-        throw new HttpErrorResponse({error: error.text, status: error.status});
-
+        this.error = error.status;
       })
   }
 }
