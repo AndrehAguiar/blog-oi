@@ -17,6 +17,42 @@
       "message": "Teste load feeds",
       "type": "[Feed] Create New Feed",
       "id": 3
+    },
+    {
+      "name": "Angular: TESTE",
+      "message": "Teste loading",
+      "type": "[Feed] Create New Feed",
+      "id": 4
+    },
+    {
+      "name": "Angular: TESTE",
+      "message": "test loading 2",
+      "type": "[Feed] Create New Feed",
+      "id": 5
+    },
+    {
+      "name": "POST TEST",
+      "message": "Test loading 2",
+      "type": "[Feed] Create New Feed",
+      "id": 6
+    },
+    {
+      "name": "POST TEST",
+      "message": "Teste loading 3",
+      "type": "[Feed] Create New Feed",
+      "id": 7
+    },
+    {
+      "name": "POST TEST",
+      "message": "Test loading 4",
+      "type": "[Feed] Create New Feed",
+      "id": 8
+    },
+    {
+      "name": "Load teste",
+      "message": "test loading 5",
+      "type": "[Feed] Create New Feed",
+      "id": 9
     }
   ]
 }

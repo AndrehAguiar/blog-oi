@@ -9,13 +9,13 @@ import { IFeedTypeahead } from '../../models/feed-typeahead.model';
 import { Feed } from '../../models/feed.model';
 import * as fromCardActions from "../../state/card/card.actions";
 import * as fromCardSelectors from "../../state/card/card.selectors";
-import { ICardState } from '../../state/card/card.reducer';
 import { IFeatureState } from '../../state/feedmap.reducer';
 
 @Component({
   selector: 'fd-feed-card',
   templateUrl: './feed-card.component.html',
   styleUrls: ['./feed-card.component.css'],
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class FeedCardComponent implements OnInit, AfterContentInit {
 
@@ -38,13 +38,14 @@ export class FeedCardComponent implements OnInit, AfterContentInit {
 
   private componentDestroyed$ = new Subject();
 
-  constructor(private store: Store<IFeatureState>) { }
+  constructor(private store: Store<IFeatureState>) {
+    this.searchControl = new FormControl(undefined);
+  }
 
   ngAfterContentInit(): void {
   }
 
   ngOnInit(): void {
-    this.searchControl = new FormControl(undefined);
     this.searchControl.valueChanges.pipe(
       takeUntil(this.componentDestroyed$)).subscribe((value: IFeedTypeahead) => {
         if (!!value) {
@@ -56,6 +57,10 @@ export class FeedCardComponent implements OnInit, AfterContentInit {
           this.onEnableSearch(false);
         }
       });
+  }
+
+  clearSearch(): void {
+    this.setListByName(true);
   }
 
   @Input() onEnableSearch(state: boolean) {

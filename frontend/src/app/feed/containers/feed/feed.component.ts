@@ -13,7 +13,7 @@ import * as fromFeedsSelectors from '../../state/feeds/feeds.selectors';
   selector: 'fd-feed',
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class FeedComponent implements OnInit, AfterContentInit, AfterContentChecked, OnDestroy {
 
@@ -41,7 +41,7 @@ export class FeedComponent implements OnInit, AfterContentInit, AfterContentChec
   }
 
   ngAfterContentChecked(): void {
-    this.isListByName$ = this.store.pipe(select(fromConfigSelectos.selectListByName));
+    //this.isListByName$ = this.store.pipe(select(fromConfigSelectos.selectListByName));
   }
 
   onToggleForm(): void {
@@ -49,12 +49,14 @@ export class FeedComponent implements OnInit, AfterContentInit, AfterContentChec
     this.toggleForm$.subscribe(status => { this.showForm = status });
     this.store.dispatch(fromConfigActions.toggleForm({ showForm: this.showForm ? false : true }));
     if (this.isListByName) this.resetCard();
+    this.onEnableSearch(true)
   }
 
   onEnableSearch(state: boolean): void {
     this.disableSearch$ = this.store.pipe(select(fromConfigSelectos.selectSearchConfig));
     this.disableSearch$.subscribe(status => { this.disableSearch = status });
     this.store.dispatch(fromConfigActions.enableSearchButton({ disableSearch: state }))
+    
   }
 
   setListByName(state: boolean): void {

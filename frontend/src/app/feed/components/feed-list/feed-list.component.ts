@@ -53,7 +53,6 @@ export class FeedListComponent implements OnInit, AfterContentInit, AfterContent
     this.isFiltered$ = this.store.pipe(select(fromFeedsSelectors.selectFeedsIsFiltered));
     if (this.isFiltered) {
       this.loadFeedsListByName();
-      this.onEnableSearch(true);
     }
   }
 
