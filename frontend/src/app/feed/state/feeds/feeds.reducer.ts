@@ -6,33 +6,47 @@ export interface IFeedsState {
     entity: Array<Feed>;
     loading: boolean;
     error: boolean;
+    isFiltered: boolean;
 }
 
 export const feedsInitialState: IFeedsState = {
     entity: new Array<Feed>(),
     loading: false,
     error: false,
+    isFiltered: false,
 }
 
 export const feedsReducer = createReducer(
     feedsInitialState,
     on(fromFeedsActions.clearFeedsState, () => feedsInitialState),
-    on(fromFeedsActions.loadFeedsList, state => ({
-        ...state,
-        loading: true,
-        error: false,
-    })),
+    on(fromFeedsActions.loadFeedsList, state => (
+        {
+            ...state,
+            loading: true,
+            error: false,
+        }
+    )),
     on(fromFeedsActions.loadFeedsListSuccess, (state, {
-        entity }) => ({
+        entity }) => (
+        {
             ...state,
             entity,
             loading: false,
-        })),
-    on(fromFeedsActions.loadFeedsListFailed, state => ({
-        ...state,
-        loading: false,
-        error: true,
-    })),
+        }
+    )),
+    on(fromFeedsActions.loadFeedsListFailed, state => (
+        {
+            ...state,
+            loading: false,
+            error: true,
+        }
+    )),
+    on(fromFeedsActions.setSlicedFeedsList, (state, {isFiltered}) => (
+        {
+            ...state,
+            isFiltered: isFiltered,
+        }
+    ))
 
 );
 

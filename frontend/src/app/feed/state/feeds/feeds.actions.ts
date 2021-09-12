@@ -5,14 +5,19 @@ import { Feed } from "../../models/feed.model";
 export const loadFeedsList = createAction('[Feeds] Load Feed List');
 
 export const loadFeedsListSuccess = createAction(
-    '[Feeds] Load Feed List Success',
+    '[FEEDS] Load Feed List Success',
     props<{ entity: Array<Feed> }>(),
 );
 
 export const loadFeedsListFailed = createAction(
-    '[Feeds] Load Feed List Failed'
+    '[FEEDS] Load Feed List Failed'
+);
+
+export const setSlicedFeedsList = createAction(
+    '[FEEDS] Slice List Feed',
+    props<{ isFiltered: boolean }>(),
 );
 
 export const clearFeedsState = createAction(
-    '[Feeds] Clear Feed State'
+    '[FEEDS] Clear Feed State'
 );

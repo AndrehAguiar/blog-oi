@@ -1,4 +1,4 @@
-import { AfterContentInit, ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { AfterContentInit, ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -21,15 +21,20 @@ export class FeedCardComponent implements OnInit, AfterContentInit {
 
   faGithub = faGithub;
   faSearch = faSearch;
+
   slicedFeedList$!: Observable<Array<Feed>>;
   slicedFeedList!: Array<Feed>;
 
   loading$!: Observable<boolean>;
   error$!: Observable<boolean>;
 
-  @Input() listFeeds$!: Observable<Array<Feed>>;
-
   searchControl!: FormControl;
+
+  @Input() disableSearch!: boolean;
+  @Output() eventEnableSearch: EventEmitter<boolean> = new EventEmitter();
+  @Output() eventListByName: EventEmitter<boolean> = new EventEmitter();
+
+  @Input() listFeeds$!: Observable<Array<Feed>>;
 
   private componentDestroyed$ = new Subject();
 
@@ -39,27 +44,26 @@ export class FeedCardComponent implements OnInit, AfterContentInit {
   }
 
   ngOnInit(): void {
-
     this.searchControl = new FormControl(undefined);
-
     this.searchControl.valueChanges.pipe(
       takeUntil(this.componentDestroyed$)).subscribe((value: IFeedTypeahead) => {
         if (!!value) {
-          this.store.dispatch(fromCardActions.loadFeedsByName({ name: value.name.toString() })
-          )
+          this.store.dispatch(fromCardActions.loadFeedsByName({ name: value.name.toString() }))
+          this.slicedFeedList$ = this.store.pipe(select(fromCardSelectors.selectCardFeedsEntity));
+          this.slicedFeedList$.pipe(takeUntil(this.componentDestroyed$)).subscribe(value => this.slicedFeedList = value);
+          this.loading$ = this.store.pipe(select(fromCardSelectors.selectCardFeedsLoading));
+          this.error$ = this.store.pipe(select(fromCardSelectors.selectCardFeedsError));
+          this.onEnableSearch(false);
         }
       });
+  }
 
-    this.slicedFeedList$ = this.store.pipe(select(fromCardSelectors.selectCardFeedsEntity));
+  @Input() onEnableSearch(state: boolean) {
+    this.eventEnableSearch.emit(state);
+  }
 
-    this.slicedFeedList$
-      .pipe(takeUntil(this.componentDestroyed$))
-      .subscribe(value => this.slicedFeedList = value);
-
-    this.loading$ = this.store.pipe(select(fromCardSelectors.selectCardFeedsLoading));
-
-    this.error$ = this.store.pipe(select(fromCardSelectors.selectCardFeedsError));
-
+  @Input() setListByName(state: boolean) {
+    this.eventListByName.emit(state);
   }
 
   ngOnDestroy(): void {

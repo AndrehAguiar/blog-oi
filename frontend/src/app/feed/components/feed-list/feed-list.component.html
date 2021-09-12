@@ -6,7 +6,13 @@
         </div>
 
         <ag-loader *ngIf="loading$ | async"></ag-loader>
+
         <div *ngIf="!(loading$ | async) && !(error$ | async) && !!listFeed">
+
+            <div class="btn-group d-flex justify-content-end">
+                <button *ngIf="isFiltered" type="button" class="btn-close top-0  translate-middle" aria-label="Close" (click)=resetList()></button>
+
+            </div>
 
             <div class="card mb-4" *ngFor="let feed of listFeed">
                 <div class="card-title">

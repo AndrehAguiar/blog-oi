@@ -2,75 +2,21 @@
   "feeds": [
     {
       "name": "Angular: TESTE",
-      "message": "POST FEED 1",
+      "message": "Teste POST 1",
       "type": "[Feed] Create New Feed",
       "id": 1
     },
     {
-      "name": "Angular: TESTE",
-      "message": "POST Feed 2",
+      "name": "POST TEST",
+      "message": "Teste filter",
       "type": "[Feed] Create New Feed",
       "id": 2
     },
     {
-      "name": "Angular: TESTE",
-      "message": "POST Feed 3",
+      "name": "Teste load",
+      "message": "Teste load feeds",
       "type": "[Feed] Create New Feed",
       "id": 3
-    },
-    {
-      "name": "Angular: TESTE",
-      "message": "POST Feed 3",
-      "type": "[Feed] Create New Feed",
-      "id": 4
-    },
-    {
-      "name": "Angular: TESTE",
-      "message": "POST Feed 4",
-      "type": "[Feed] Create New Feed",
-      "id": 5
-    },
-    {
-      "name": "Angular: TESTE",
-      "message": "POST Feed 5",
-      "type": "[Feed] Create New Feed",
-      "id": 6
-    },
-    {
-      "name": "Angular: TESTE",
-      "message": "POST Feed 6",
-      "type": "[Feed] Create New Feed",
-      "id": 7
-    },
-    {
-      "name": "CARD: Teste",
-      "message": "POST Feed 7",
-      "type": "[Feed] Create New Feed",
-      "id": 8
-    },
-    {
-      "name": "CARD: Teste",
-      "message": "POST Feed 8",
-      "type": "[Feed] Create New Feed",
-      "id": 9
-    },
-    {
-      "name": "CARD: Teste",
-      "message": "POST Feed 9",
-      "type": "[Feed] Create New Feed",
-      "id": 10
-    },
-    {
-      "name": "CARD: Teste",
-      "message": "POST Feed 10",
-      "type": "[Feed] Create New Feed",
-      "id": 11
-    },
-    {
-      "name": "POST TEST",
-      "message": "POST Feed 11",
-      "type": "[Feed] Create New Feed",
-      "id": 12
     }
   ]
 }

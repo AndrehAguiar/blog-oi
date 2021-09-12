@@ -17,3 +17,8 @@ export const selectFeedsError = createSelector(
     selectFeedsState,
     (feedsState: IFeatureState) => feedsState.feeds.error,
 );
+
+export const selectFeedsIsFiltered = createSelector(
+    selectFeedsState,
+    (feedsState: IFeatureState) => feedsState.feeds.isFiltered,
+)

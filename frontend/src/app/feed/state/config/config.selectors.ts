@@ -3,7 +3,17 @@ import { IFeatureState } from "../feedmap.reducer";
 
 export const selectStateConfig = createFeatureSelector<IFeatureState>('feedModule');
 
-export const selectFeedConfig = createSelector(
+export const selectFormConfig = createSelector(
     selectStateConfig,
     (configState: IFeatureState) => configState.config.showForm
 );
+
+export const selectSearchConfig = createSelector(
+    selectStateConfig,
+    (configState: IFeatureState) => configState.config.disableSearch
+);
+
+export const selectListByName = createSelector(
+    selectStateConfig,
+    (configState: IFeatureState) => configState.config.listIsByName
+)

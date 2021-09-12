@@ -2,12 +2,12 @@
     <div class="row my-5">
 
         <div class="col-md-4">
-            <fd-feed-card [listFeeds$]="listFeeds$"></fd-feed-card>
+            <fd-feed-card [setListByName]="setListByName" [onEnableSearch]="onEnableSearch" [disableSearch]="disableSearch" [listFeeds$]="listFeeds$"></fd-feed-card>
         </div>
 
         <div class="col-md-8 ps-5">
             <fd-feed-form [onToggleForm]="onToggleForm" *ngIf="showForm"></fd-feed-form>
-            <fd-feed-list [onToggleForm]="onToggleForm" *ngIf="!showForm"></fd-feed-list>
+            <fd-feed-list [resetCard]="resetCard" [isListByName]="isListByName" [onEnableSearch]="onEnableSearch" [onToggleForm]="onToggleForm" *ngIf="!showForm"></fd-feed-list>
         </div>
 
     </div>

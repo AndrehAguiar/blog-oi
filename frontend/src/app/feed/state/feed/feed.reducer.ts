@@ -33,8 +33,6 @@ export const feedReducer = createReducer(
         saving: false,
         error: true,
     })),
-
-
 );
 
 export const fnFeedReducer = (state: IFeedState, action: Action): IFeedState => {

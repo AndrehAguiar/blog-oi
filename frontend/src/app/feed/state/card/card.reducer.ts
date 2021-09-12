@@ -1,6 +1,4 @@
 import { Action, createReducer, on } from "@ngrx/store";
-import { Feed } from "../../models/feed.model";
-import { IFeedsState } from "../feeds/feeds.reducer";
 import * as fromCardActions from "./card.actions";
 
 export interface ICardState {
@@ -35,7 +33,7 @@ export const cardReducer = createReducer(
     }))
 );
 
-export function fnCardReducer(state: ICardState, action: Action): IFeedsState {
+export function fnCardReducer(state: ICardState, action: Action): ICardState {
     return cardReducer(state, action);
 
 }
